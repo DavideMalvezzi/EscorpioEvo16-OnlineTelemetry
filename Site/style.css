@@ -1,0 +1,116 @@
+
+body {
+    background-color: #373737;
+    margin: 8px;
+    overflow: hidden;
+
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+
+.cell{
+    font-family: Tahoma;
+    background-color: #1d1d1d;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+#mainContainer{
+    position: relative; 
+    width: 100%; 
+    height: 100%;
+}
+
+#driverFormArea{
+    position: absolute;
+    top: 1%;
+    left: 0.5%;
+
+    width: 34.5%;
+    height: 42%;
+    //border: 1px solid blue;
+}
+
+#motorFormArea{
+    position: absolute;
+    top: 1%;
+    left: 35.5%;
+
+    width: 31.7%;
+    height: 33%;
+    //border: 1px solid blue;
+}
+
+#bmsFormArea{
+    position: absolute;
+    top: 1%;
+    right: 0.5%;
+
+    width: 31.7%;
+    height: 33%;
+    //border: 1px solid blue;
+}
+
+#logoArea{
+    position: absolute;
+    bottom: 1%;
+    left: 0.5%;
+    
+    width: 34.5%;
+    height: 55%;
+    //border: 1px solid blue;
+}
+
+#mapCanvas{
+    position: absolute;
+    bottom: 1%;
+    left: 35.5%;
+
+    width: 64%;
+    height: 64%;
+    //border: 1px solid blue;
+}
+
+#logoImg{
+    object-fit: contain; 
+    /*
+	width: 100%; 
+    height: 100%;
+	*/
+	max-width:100%;
+	max-height:100%;
+	margin: auto;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.canvasjs-chart-credit{
+    display: none;
+}
+
+.msgContainer{
+    height: 32px; 
+    line-height: 32px; 
+    vertical-align: middle; 
+}
+
+.msgIcon{
+    float: left; 
+    margin-left:8px; 
+    margin-top: 8px;
+}
+
+@font-face {
+    font-family: 'DigitFont';
+    src: url('fonts/DigitFont.ttf');
+}
+
+#preLoadFont {
+    font-family: "DigitFont";
+    opacity: 0;
+    height: 0;
+    width: 0;
+    display: inline-block;
+}
