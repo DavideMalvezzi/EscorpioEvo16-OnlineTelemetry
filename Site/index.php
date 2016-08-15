@@ -43,9 +43,7 @@
         <script type = "text/javascript" src = "js/map/Map.js"></script>
 
         <?php
-
-			include "dbaccess.php";
-
+			     include "dbaccess.php";
         ?>
 
         <script type = "text/javascript">
@@ -56,7 +54,7 @@
                 $result = mysqli_query($conn, $q);
                 if($result){
                     while(($row = $result->fetch_assoc())) {
-                        echo "channel[" . $row["can_id"] . "] = {"
+                        echo "channels[" . $row["can_id"] . "] = {"
                                 /*name:'". $row["Name"] ."', */ .
                                 "size:" . $row["size"] . "," .
                                 "type:'" . $row["type"] . "'," .
@@ -139,26 +137,31 @@
 
                 <?php
                     //$trackID = $_GET["track"];
-                    $trackID = 2;
+                    $trackID = 1;
                     //$trackID = 4;
-					$q = "SELECT CenterLat, CenterLon FROM Track WHERE ID = " . $trackID;
+	                  $q = "SELECT center_lat, center_lon, path FROM track WHERE id = " . $trackID;
                     $result = mysqli_query($conn, $q);
                     if($result){
                         if($row = $result->fetch_assoc()){
-                            echo "lat = " . $row["CenterLat"] . ";";
-                            echo "lon = " . $row["CenterLon"] . ";";
+                            echo "lat = " . $row["center_lat"] . ";" . PHP_EOL;
+                            echo "lon = " . $row["center_lon"] . ";" . PHP_EOL;
                         }
                     }
                 ?>
 
                 var track = [
                     <?php
-                        $q = "SELECT Lat, Lon FROM Coordinate WHERE TrackCod = " . $trackID . " ORDER BY ID";
-                        $result = mysqli_query($conn, $q);
                         if($result){
+                            $path = json_decode($row["path"]);
+                            $path_len = count($path);
+                            for($i = 0; $i < $path_len; $i++){
+                              echo "{lat: " . $path[$i]->lat . ", lng: " .  $path[$i]->lng . "},\n";
+                            }
+                            /*
                             while(($row = $result->fetch_assoc())) {
                                 echo "{lat: " . $row["Lat"] . ", lng: " . $row["Lon"] . "},\n";
                             }
+                            */
                         }
                     ?>
                 ];
@@ -238,11 +241,11 @@
                 //Motor map
                 forms["motor"].addWidget(-1,      new Label(2, 15, 45, 6, "Driver Map", "Tahoma", "#ffffff"));
                 forms["motor"].addWidget(0x91,   new LedDigit(52, 20, 15, 16, 1, 0, "#7fb36e"));
-				//Rear temp
-				forms["motor"].addWidget(-1,      new Label(12, 35, 55, 6, "Rear Temp", "Tahoma", "#ffffff"));
+        				//Rear temp
+        				forms["motor"].addWidget(-1,      new Label(12, 35, 55, 6, "Rear Temp", "Tahoma", "#ffffff"));
                 forms["motor"].addWidget(0x511,   new LedDigit(17, 55, 47, 16, 2, 1, "#e2463a"));
-				//Motor temp
-				forms["motor"].addWidget(-1,      new Label(12, 70, 55, 6, "Motor Temp", "Tahoma", "#ffffff"));
+        				//Motor temp
+        				forms["motor"].addWidget(-1,      new Label(12, 70, 55, 6, "Motor Temp", "Tahoma", "#ffffff"));
                 forms["motor"].addWidget(0x510,   new LedDigit(17, 90, 47, 16, 2, 1, "#e2463a"));
                 //Chart labels
                 forms["motor"].addWidget(-1,      new Label(82, 14, 18, 6, "CUR", "Tahoma", "#ffffff"));
@@ -284,7 +287,7 @@
 
                 var i = 0;
 
-				console.log("New msg received");
+	              console.log("New msg received");
 
                 /*
                 console.log("received " + dv.byteLength);
